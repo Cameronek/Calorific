@@ -1,4 +1,4 @@
-module Calorific
+module github.com/cameronek/Calorific
 
 go 1.23.4
 

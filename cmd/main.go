@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
-	"github.com/a-h/templ/runtime/render"
+	"github.com/a-h/templ"
 	"github.com/cameronek/Calorific/internal/handlers"
 ) 
 
