@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/a-h/templ/runtime/render"
-	"github.com/cameronek/Calorific/templ-project/internal/handlers"
+	"github.com/cameronek/Calorific/internal/handlers"
 ) 
 
 func main() {

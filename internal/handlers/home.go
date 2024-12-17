@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/a-h/templ/runtime/render"
-	"github.com/cameronek/Calorific/templ-project/internal/templates"
+	"github.com/cameronek/Calorific/internal/templates"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
