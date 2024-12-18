@@ -1,16 +1,14 @@
 package handlers
 
 import (
-	"Calorific/internal/templates"
+	"context"
 	"net/http"
-
-	"github.com/a-h/templ/runtime/render"
 	"github.com/cameronek/Calorific/internal/templates"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	component := templates.Index("Gopher")
-	render.New(w).Render(r.Context(), component)
+	component := templates.Index("Cameron")
+	component.Render(context.Background(), w)
 }
 
 

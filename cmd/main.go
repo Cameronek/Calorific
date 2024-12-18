@@ -3,8 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-
-	"github.com/a-h/templ"
 	"github.com/cameronek/Calorific/internal/handlers"
 ) 
 
@@ -21,5 +19,4 @@ func main() {
 
 	log.Println("Server start on localhost 8080")
 	log.Fatal(http.ListenAndServe(":8080", mux))
-
 }
