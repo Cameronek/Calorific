@@ -16,6 +16,7 @@ func Initialize(dbPath string) (*DB, error) {
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		file, err := os.Create(dbPath)
 		if err != nil {
+			log.Println("Error: Could not create db")
 			return nil, err
 		}		
 		file.Close()
