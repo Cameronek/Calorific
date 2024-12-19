@@ -3,10 +3,19 @@ package main
 import (
 	"log"
 	"net/http"
+
+	"github.com/cameronek/Calorific/internal/database"
 	"github.com/cameronek/Calorific/internal/handlers"
 ) 
 
 func main() {
+
+	db, err := database.Initialize("./calorific.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
 
 	mux := http.NewServeMux()
 
