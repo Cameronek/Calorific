@@ -94,6 +94,6 @@ func createTables(db *sql.DB) error {
 }
 
 // Close DB connection (use pointer receiver such that actual DB is closed)
-func (db *DB) CloseDB() error {
+func (db *DB) Close() error {
 	return db.DB.Close()
 } 

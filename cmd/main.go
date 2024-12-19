@@ -14,6 +14,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("Data initialzied successfully")
 	defer db.Close()
 
 
@@ -21,7 +22,7 @@ func main() {
 
 	// Serve static files
 	fs := http.FileServer(http.Dir("./static"))
-	mux.Handle("./static", http.StripPrefix("./static", fs))
+	mux.Handle("./static/", http.StripPrefix("./static/", fs))
 
 	// Home route
 	mux.HandleFunc("/", handlers.HomeHandler)
