@@ -1,16 +1,31 @@
 package templates
 
+css mainBody() {
+    font-family: Arial, sans-serif;
+    background-color: #34a1eb;
+    margin: 0;
+    padding: 0;
+	color: #FFFFFF;
+}
+
+css mainHeader() {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
 templ Base(title string) {
 	<!DOCTYPE html>
 	<html lang="en">
-	<head>
+	<head class={mainHeader}>
 		<meta charset="UTF-8"/>
 		<title>{title}</title>
-		<link rel="stylesheet" href="static/css/main.css"/>
+		<link rel="stylesheet" href="/static/css/main.css">
 	</head>
-	<body>
+	<body class={mainBody}>
 		{ children...}
-		<script scr="/static/js/main.js"/>
+		<script scr="/static/js/main.js"></script>
 	</body>
 	</html>
 }
