@@ -8,27 +8,27 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func mainBody() templ.CSSClass {
+func MainBody() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`font-family:Arial, sans-serif;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`font-family:Georgia, sans-serif;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#34a1eb;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`margin:0;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`padding:0;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFFFFF;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`mainBody`, templ_7745c5c3_CSSBuilder.String())
+	templ_7745c5c3_CSSID := templ.CSSID(`MainBody`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
 		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
 	}
 }
 
-func mainHeader() templ.CSSClass {
+func MainHeader() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
 	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#4CAF50;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`color:white;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFFFFF;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`padding:1rem;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`mainHeader`, templ_7745c5c3_CSSBuilder.String())
+	templ_7745c5c3_CSSID := templ.CSSID(`MainHeader`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
 		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
@@ -60,7 +60,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var2 = []any{mainHeader}
+		var templ_7745c5c3_Var2 = []any{MainHeader}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -95,7 +95,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var5 = []any{mainBody}
+		var templ_7745c5c3_Var5 = []any{MainBody}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var5...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

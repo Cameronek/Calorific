@@ -21,8 +21,9 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Serve static files
-	fs := http.FileServer(http.Dir("/static"))
-	mux.Handle("/static/", http.StripPrefix("/static/", fs))
+	// Not going to use external static files for the time being
+	//fs := http.FileServer(http.Dir("static"))
+	//mux.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	// Home route
 	mux.HandleFunc("/", handlers.HomeHandler)
