@@ -1,0 +1,17 @@
+package templates
+
+css Btn() {
+	background-color: #4254f5;
+	color: #FFF;
+	font-family: Helvetica, sans-serif;
+
+	border: 2px solid #34a1eb;
+	border-radius: 8px;
+	padding: 16px;
+}
+
+templ DefButton(text string) {
+	<button class={Btn}>
+		{text}
+	</button>
+}

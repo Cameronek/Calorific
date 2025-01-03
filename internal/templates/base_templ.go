@@ -24,7 +24,7 @@ func MainBody() templ.CSSClass {
 
 func MainHeader() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#4CAF50;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#4caf50;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFFFFF;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`padding:1rem;`)
@@ -91,7 +91,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title><link rel=\"stylesheet\" href=\"/static/css/main.css\"></head>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</title></head>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

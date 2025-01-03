@@ -11,13 +11,17 @@ import templruntime "github.com/a-h/templ/runtime"
 func HomeTitle() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFFFFF;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#4254f5;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`text-shadow:2px 2px 2px #000000;   
+    background-color: #4254f5;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-bottom-left-radius:8px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-bottom-right-radius:8px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`padding:10px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`margin:0 auto;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center; 
+
+
+    vertical-align: text-bottom;`)
 	templ_7745c5c3_CSSID := templ.CSSID(`HomeTitle`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
@@ -25,7 +29,7 @@ func HomeTitle() templ.CSSClass {
 	}
 }
 
-func Index(name string) templ.Component {
+func Index() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -76,20 +80,11 @@ func Index(name string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><h1>Calorific.</h1><h2>Welcome, ")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><h1><img src=\"static/images/CalorificFire.png\"> Calorific  <img src=\"static/images/CalorificFire.png\"></h1></div><br>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var5 string
-			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(name)
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/index.templ`, Line: 23, Col: 21}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("!</h2></div>")
+			templ_7745c5c3_Err = DefButton("Click me!").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

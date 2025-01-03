@@ -7,7 +7,7 @@ import (
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	component := templates.Index("Cameron")
+	component := templates.Index()
 	component.Render(context.Background(), w)
 }
 

@@ -3,7 +3,7 @@ package templates
 
 css HomeTitle() {
     color: #FFFFFF;
-
+    text-shadow: 2px 2px 2px #000000;   
     background-color: #4254f5;
 
     border:2px solid black;
@@ -13,14 +13,22 @@ css HomeTitle() {
     padding: 10px;
     margin: 0 auto;
 
-    text-align: center;
+    text-align: center; 
+
+
+    vertical-align: text-bottom;
 }
 
-templ Index(name string) {
+templ Index() {
 	@Base("Calorific - Home Page") {
 		<div class={HomeTitle}>
-			<h1>Calorific.</h1>
-			<h2>Welcome, {name}!</h2>
+			<h1>
+                <img src="static/images/CalorificFire.png"/>
+                Calorific 
+                <img src="static/images/CalorificFire.png"/>
+            </h1>
 		</div>
+        <br></br>
+            @DefButton("Click me!")
 	}
 }
