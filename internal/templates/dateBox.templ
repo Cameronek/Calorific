@@ -1,0 +1,36 @@
+package templates
+
+css OuterBox() {
+	background-color: #6473ed;
+	color: #FFF;
+
+	border: 2px solid black;
+	border-radius: 8px;
+
+	height: 10vw;
+	width: 10vw;
+
+	display: flex;
+    flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+css InnerBox() {
+	background-color: #fff;
+	color: #000;
+
+	border: 2px solid black;
+	border-radius: 8px;
+
+	height: 6vw;
+	width: 6vw;
+	transform: translateY(-10%);
+}
+
+templ DateBox() {
+	<div class={OuterBox}>
+		<div class={InnerBox}>
+		</div>
+	</div>
+}

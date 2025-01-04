@@ -15,8 +15,15 @@ css HomeTitle() {
 
     text-align: center; 
 
-
     vertical-align: text-bottom;
+}
+
+css DateContainer() {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
 }
 
 templ Index() {
@@ -24,11 +31,18 @@ templ Index() {
 		<div class={HomeTitle}>
 			<h1>
                 <img src="static/images/CalorificFire.png"/>
-                Calorific 
+                Calorific. 
                 <img src="static/images/CalorificFire.png"/>
             </h1>
 		</div>
         <br></br>
-            @DefButton("Click me!")
+        <div class={DateContainer}>
+            @DateBox()
+            @DateBox()
+            @DateBox()
+            @DateBox()
+            @DateBox()
+            @DateBox()
+        </div>
 	}
 }

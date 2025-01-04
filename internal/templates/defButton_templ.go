@@ -10,10 +10,10 @@ import templruntime "github.com/a-h/templ/runtime"
 
 func Btn() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#4254f5;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#6473ed;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFF;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`font-family:Helvetica, sans-serif;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid #34a1eb;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-radius:8px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`padding:16px;`)
 	templ_7745c5c3_CSSID := templ.CSSID(`Btn`, templ_7745c5c3_CSSBuilder.String())

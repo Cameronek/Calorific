@@ -22,28 +22,15 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	// Serve static files
-	// Not going to use external static files for the time being
-	//fs := http.FileServer(http.Dir("static"))
-	//mux.Handle("/static/", http.StripPrefix("/static/", fs))
-
-
-/*
-	staticPath, err := filepath.Abs("internal/templates")
-	log.Println(staticPath)
-
-	if err != nil {
-		log.Fatalf("Failed to resolve static directory: %v", err)
-	} */
 
 	// Home route
 	mux.HandleFunc("GET /{$}", handlers.HomeHandler)
 
-	// Image route
-	images := http.FileServer(http.Dir("static"))
+	// Static route
+	static := http.FileServer(http.Dir("static"))
 
 	// GET localhost/static/
-	mux.Handle("/static/", http.StripPrefix("/static/", images))
+	mux.Handle("/static/", http.StripPrefix("/static/", static))
 
 	log.Println("Server start on localhost 8082")
 	log.Fatal(http.ListenAndServe(":8082", mux))
