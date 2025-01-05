@@ -14,6 +14,7 @@ func OuterBox() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFF;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-radius:8px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`box-shadow:0px 2px 2px black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`height:10vw;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`width:10vw;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
@@ -33,9 +34,14 @@ func InnerBox() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#000;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-radius:8px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`box-shadow:0px 1px 1px black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`height:6vw;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`width:6vw;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`transform:translateY(-10%);`)
+	templ_7745c5c3_CSSBuilder.WriteString(`font-size:4vw;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
 	templ_7745c5c3_CSSID := templ.CSSID(`InnerBox`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
@@ -43,7 +49,19 @@ func InnerBox() templ.CSSClass {
 	}
 }
 
-func DateBox() templ.Component {
+func DateText() templ.CSSClass {
+	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
+	templ_7745c5c3_CSSBuilder.WriteString(`font-family:Verdana, sans-serif;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`font-size:4vw;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center;`)
+	templ_7745c5c3_CSSID := templ.CSSID(`DateText`, templ_7745c5c3_CSSBuilder.String())
+	return templ.ComponentCSSClass{
+		ID:    templ_7745c5c3_CSSID,
+		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
+	}
+}
+
+func DateBox(day string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -104,7 +122,42 @@ func DateBox() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 = []any{DateText}
+		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var6...)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<span class=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 string
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var6).String())
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/dateBox.templ`, Line: 1, Col: 0}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var8 string
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(day)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/dateBox.templ`, Line: 48, Col: 30}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

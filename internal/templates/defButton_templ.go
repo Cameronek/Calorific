@@ -12,10 +12,10 @@ func Btn() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
 	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#6473ed;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFF;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`font-family:Helvetica, sans-serif;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-radius:8px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`padding:16px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`cursor:pointer;`)
 	templ_7745c5c3_CSSID := templ.CSSID(`Btn`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
@@ -23,7 +23,49 @@ func Btn() templ.CSSClass {
 	}
 }
 
-func DefButton(text string) templ.Component {
+func Hidden() templ.CSSClass {
+	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
+	templ_7745c5c3_CSSBuilder.WriteString(`display:none;`)
+	templ_7745c5c3_CSSID := templ.CSSID(`Hidden`, templ_7745c5c3_CSSBuilder.String())
+	return templ.ComponentCSSClass{
+		ID:    templ_7745c5c3_CSSID,
+		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
+	}
+}
+
+func FormPopup() templ.CSSClass {
+	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
+	templ_7745c5c3_CSSBuilder.WriteString(`display:none;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#6473ed;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`border:3px solid #000;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`border-radius:8px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`position:fixed;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`z-index:9;`)
+	templ_7745c5c3_CSSID := templ.CSSID(`FormPopup`, templ_7745c5c3_CSSBuilder.String())
+	return templ.ComponentCSSClass{
+		ID:    templ_7745c5c3_CSSID,
+		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
+	}
+}
+
+func Overlay() templ.CSSClass {
+	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
+	templ_7745c5c3_CSSBuilder.WriteString(`display:none;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`position:fixed;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`z-index:9;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`top:0;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`left:0;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`width:100%;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`height:100%;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`backdrop-filter:blur(5px);`)
+	templ_7745c5c3_CSSID := templ.CSSID(`Overlay`, templ_7745c5c3_CSSBuilder.String())
+	return templ.ComponentCSSClass{
+		ID:    templ_7745c5c3_CSSID,
+		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
+	}
+}
+
+func AddButton(text string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -62,20 +104,64 @@ func DefButton(text string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" onclick=\"openForm()\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/defButton.templ`, Line: 15, Col: 7}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/defButton.templ`, Line: 46, Col: 8}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 = []any{Overlay}
+		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var5...)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var5).String())
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/defButton.templ`, Line: 1, Col: 0}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" id=\"overlay\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 = []any{FormPopup}
+		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var7...)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var8 string
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var7).String())
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/defButton.templ`, Line: 1, Col: 0}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" id=\"myForm\"><form><h1>Login</h1><label for=\"email\"><b>Email</b></label> <input type=\"text\" placeholder=\"Enter Email\" name=\"email\" required> <label for=\"psw\"><b>Password</b></label> <input type=\"password\" placeholder=\"Enter Password\" name=\"psw\" required> <button type=\"submit\">Login</button> <button type=\"button\" onclick=\"closeForm()\">Close</button></form></div><script>\r\n\t\t\tfunction openForm() {\r\n\t\t\t    document.getElementById(\"myForm\").style.display = \"block\";\r\n\t\t\t\tdocument.getElementById(\"overlay\").style.display = \"block\";\r\n\t\t\t}\r\n\r\n\t\t\tfunction closeForm() {\r\n  \t\t\t \tdocument.getElementById(\"myForm\").style.display = \"none\";\r\n\t\t\t\tdocument.getElementById(\"overlay\").style.display = \"none\";\r\n\t\t\t}\r\n\t\t</script></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

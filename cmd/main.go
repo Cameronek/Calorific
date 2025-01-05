@@ -6,9 +6,8 @@ import (
 
 	"github.com/cameronek/Calorific/internal/database"
 	"github.com/cameronek/Calorific/internal/handlers"
-
 	//"path/filepath"
-) 
+)
 
 func main() {
 
@@ -19,9 +18,7 @@ func main() {
 	log.Println("Data initializied successfully")
 	defer db.Close()
 
-
 	mux := http.NewServeMux()
-
 
 	// Home route
 	mux.HandleFunc("GET /{$}", handlers.HomeHandler)

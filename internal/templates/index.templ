@@ -1,5 +1,9 @@
 package templates
 
+import (
+    "time"
+    "strconv"
+)
 
 css HomeTitle() {
     color: #FFFFFF;
@@ -24,6 +28,16 @@ css DateContainer() {
     justify-content: center;
     align-items: center;
     gap: 30px;
+    margin: 30px;
+}
+
+css CalorieContainer() {
+    display: flex;
+    gap: 60px;
+    margin: 60px;
+    justify-content: center;
+    align-items: center;
+
 }
 
 templ Index() {
@@ -35,14 +49,18 @@ templ Index() {
                 <img src="static/images/CalorificFire.png"/>
             </h1>
 		</div>
-        <br></br>
         <div class={DateContainer}>
-            @DateBox()
-            @DateBox()
-            @DateBox()
-            @DateBox()
-            @DateBox()
-            @DateBox()
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day())){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day())){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day())){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day())){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day())){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day())){}
         </div>
+        <div class={CalorieContainer}>
+            @AddButton("Add Food"){}
+        </div>
+
+
 	}
 }

@@ -3,15 +3,76 @@ package templates
 css Btn() {
 	background-color: #6473ed;
 	color: #FFF;
-	font-family: Helvetica, sans-serif;
 
 	border: 2px solid black;
 	border-radius: 8px;
 	padding: 16px;
+
+	cursor: pointer;
 }
 
-templ DefButton(text string) {
-	<button class={Btn}>
-		{text}
-	</button>
+css Hidden() {
+	display: none;
+}
+
+css FormPopup() {
+	display: none;
+
+    background-color: #6473ed;
+    border: 3px solid #000;
+    border-radius: 8px;
+    
+    position: fixed;
+    z-index: 9;
+}
+
+css Overlay() {
+    display: none;
+
+    position: fixed;
+    z-index: 9;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+}
+
+templ AddButton(text string) {
+
+	
+		<button class={Btn} onclick="openForm()">
+			{text}
+		</button>
+
+	<div class={Overlay} id="overlay">
+
+		<div class={FormPopup} id="myForm">
+	    <form>
+		    <h1>Login</h1>
+
+		    <label for="email"><b>Email</b></label>
+		    <input type="text" placeholder="Enter Email" name="email" required>
+
+		    <label for="psw"><b>Password</b></label>
+		    <input type="password" placeholder="Enter Password" name="psw" required>
+
+		    <button type="submit">Login</button>
+		    <button type="button" onclick="closeForm()">Close</button>
+		</form>
+		</div>
+
+		<script>
+			function openForm() {
+			    document.getElementById("myForm").style.display = "block";
+				document.getElementById("overlay").style.display = "block";
+			}
+
+			function closeForm() {
+  			 	document.getElementById("myForm").style.display = "none";
+				document.getElementById("overlay").style.display = "none";
+			}
+		</script>
+	</div>
 }

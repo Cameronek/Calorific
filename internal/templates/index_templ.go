@@ -8,6 +8,11 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import (
+	"strconv"
+	"time"
+)
+
 func HomeTitle() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
 	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFFFFF;`)
@@ -35,7 +40,22 @@ func DateContainer() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`gap:30px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`margin:30px;`)
 	templ_7745c5c3_CSSID := templ.CSSID(`DateContainer`, templ_7745c5c3_CSSBuilder.String())
+	return templ.ComponentCSSClass{
+		ID:    templ_7745c5c3_CSSID,
+		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
+	}
+}
+
+func CalorieContainer() templ.CSSClass {
+	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
+	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`gap:60px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`margin:60px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
+	templ_7745c5c3_CSSID := templ.CSSID(`CalorieContainer`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
 		ID:    templ_7745c5c3_CSSID,
 		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
@@ -93,7 +113,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><h1><img src=\"static/images/CalorificFire.png\"> Calorific.  <img src=\"static/images/CalorificFire.png\"></h1></div><br>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><h1><img src=\"static/images/CalorificFire.png\"> Calorific.  <img src=\"static/images/CalorificFire.png\"></h1></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -119,27 +139,57 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day())).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day())).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day())).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day())).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day())).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day())).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var7 = []any{CalorieContainer}
+			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var7...)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var8 string
+			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var7).String())
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/index.templ`, Line: 1, Col: 0}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = AddButton("Add Food").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
