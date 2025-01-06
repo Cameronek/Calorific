@@ -15,13 +15,16 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println("Data initializied successfully")
+	log.Println("Data initialized successfully")
 	defer db.Close()
 
 	mux := http.NewServeMux()
 
 	// Home route
-	mux.HandleFunc("GET /{$}", handlers.HomeHandler)
+	mux.HandleFunc("/", handlers.HomeHandler)
+
+	// POST: Add food route
+	mux.HandleFunc("/addFood", handlers.AddFoodHandler)
 
 	// Static route
 	static := http.FileServer(http.Dir("static"))

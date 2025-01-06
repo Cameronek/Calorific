@@ -39,6 +39,14 @@ css Overlay() {
     backdrop-filter: blur(5px);
 }
 
+css FormBtns() {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
 templ AddButton(text string) {
 
 	
@@ -49,18 +57,20 @@ templ AddButton(text string) {
 	<div class={Overlay} id="overlay">
 
 		<div class={FormPopup} id="myForm">
-	    <form>
-		    <h1>Login</h1>
+		    <form action="/addFood" method="POST" onsubmit="closeForm()">
+			    <h1>Add Food</h1>
 
-		    <label for="email"><b>Email</b></label>
-		    <input type="text" placeholder="Enter Email" name="email" required>
+			    <label for="food"><b>Food:</b></label>
+			    <input type="text" placeholder="Enter Food" name="food" required>
 
-		    <label for="psw"><b>Password</b></label>
-		    <input type="password" placeholder="Enter Password" name="psw" required>
+			    <label for="kCals"><b>kCals:</b></label>
+			    <input type="text" placeholder="Enter Calories" name="kCals" required>
 
-		    <button type="submit">Login</button>
-		    <button type="button" onclick="closeForm()">Close</button>
-		</form>
+			    <div class={FormBtns}>
+			    	<button type="submit">Add</button>
+			    	<button type="button" onclick="closeForm()">Close</button>
+				</div>
+			</form>
 		</div>
 
 		<script>

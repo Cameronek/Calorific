@@ -65,6 +65,20 @@ func Overlay() templ.CSSClass {
 	}
 }
 
+func FormBtns() templ.CSSClass {
+	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
+	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`flex-direction:row;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`padding:10px;`)
+	templ_7745c5c3_CSSID := templ.CSSID(`FormBtns`, templ_7745c5c3_CSSBuilder.String())
+	return templ.ComponentCSSClass{
+		ID:    templ_7745c5c3_CSSID,
+		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
+	}
+}
+
 func AddButton(text string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -111,7 +125,7 @@ func AddButton(text string) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/defButton.templ`, Line: 46, Col: 8}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/defButton.templ`, Line: 54, Col: 8}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -161,7 +175,29 @@ func AddButton(text string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" id=\"myForm\"><form><h1>Login</h1><label for=\"email\"><b>Email</b></label> <input type=\"text\" placeholder=\"Enter Email\" name=\"email\" required> <label for=\"psw\"><b>Password</b></label> <input type=\"password\" placeholder=\"Enter Password\" name=\"psw\" required> <button type=\"submit\">Login</button> <button type=\"button\" onclick=\"closeForm()\">Close</button></form></div><script>\r\n\t\t\tfunction openForm() {\r\n\t\t\t    document.getElementById(\"myForm\").style.display = \"block\";\r\n\t\t\t\tdocument.getElementById(\"overlay\").style.display = \"block\";\r\n\t\t\t}\r\n\r\n\t\t\tfunction closeForm() {\r\n  \t\t\t \tdocument.getElementById(\"myForm\").style.display = \"none\";\r\n\t\t\t\tdocument.getElementById(\"overlay\").style.display = \"none\";\r\n\t\t\t}\r\n\t\t</script></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" id=\"myForm\"><form action=\"/addFood\" method=\"POST\" onsubmit=\"closeForm()\"><h1>Add Food</h1><label for=\"food\"><b>Food:</b></label> <input type=\"text\" placeholder=\"Enter Food\" name=\"food\" required> <label for=\"kCals\"><b>kCals:</b></label> <input type=\"text\" placeholder=\"Enter Calories\" name=\"kCals\" required>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var9 = []any{FormBtns}
+		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var9...)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var10 string
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(templ.CSSClasses(templ_7745c5c3_Var9).String())
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/defButton.templ`, Line: 1, Col: 0}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><button type=\"submit\">Add</button> <button type=\"button\" onclick=\"closeForm()\">Close</button></div></form></div><script>\r\n\t\t\tfunction openForm() {\r\n\t\t\t    document.getElementById(\"myForm\").style.display = \"block\";\r\n\t\t\t\tdocument.getElementById(\"overlay\").style.display = \"block\";\r\n\t\t\t}\r\n\r\n\t\t\tfunction closeForm() {\r\n  \t\t\t \tdocument.getElementById(\"myForm\").style.display = \"none\";\r\n\t\t\t\tdocument.getElementById(\"overlay\").style.display = \"none\";\r\n\t\t\t}\r\n\t\t</script></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
