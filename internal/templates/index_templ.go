@@ -9,6 +9,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
+	"github.com/cameronek/Calorific/internal/database"
 	"strconv"
 	"time"
 )
@@ -190,6 +191,10 @@ func Index() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = AddButton("Add Food").Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = FoodDisplay(ctx.Value("foods").([]database.Food)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -1,12 +1,23 @@
 package templates
 
+import (
+	"github.com/cameronek/Calorific/internal/database"
+	"github.com/cameronek/Calorific/internal/database"
+	"strconv"
+)
+
 css Btn() {
 	background-color: #6473ed;
 	color: #FFF;
 
 	border: 2px solid black;
 	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
 	padding: 16px;
+
+	font-size: 2vw;
+	width: 20vw;
+	height: 10vh;
 
 	cursor: pointer;
 }
@@ -15,12 +26,21 @@ css Hidden() {
 	display: none;
 }
 
+css FormContainer() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 200px;
+}
+
 css FormPopup() {
 	display: none;
 
     background-color: #6473ed;
     border: 3px solid #000;
     border-radius: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
     
     position: fixed;
     z-index: 9;
@@ -36,53 +56,142 @@ css Overlay() {
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(50px);
 }
 
-css FormBtns() {
+css FormBtnContainer() {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 10px;
+    gap: 10px;
 }
 
-templ AddButton(text string) {
+css FormBtn() {
+    color: #fff;
+    background-color: #4254f5;
+    cursor: pointer;
+    border: 1px solid black;
+	border-radius: 4px;
+}
 
-	
-		<button class={Btn} onclick="openForm()">
-			{text}
-		</button>
+css FormTitle() {
+	text-shadow: 2px 2px 2px #000000;   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+css FormFields() {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+css Input() {
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+templ AddButton(text string) {	
+	<button class={Btn} onclick="openAddForm()">
+		{text}
+	</button>
 
 	<div class={Overlay} id="overlay">
+		<div class={FormContainer}>
+			<div class={FormPopup} id="myForm">
+			    <form action="/addFood" method="POST" onsubmit="closeAddForm()">
+				    <h1 class={FormTitle}>Add Food</h1>
+				    <div class={FormFields}>
+				    	<label for="food"><b>Food:</b></label>
+				    	<input class={Input} type="text" placeholder="Enter Food" name="food" required>
 
-		<div class={FormPopup} id="myForm">
-		    <form action="/addFood" method="POST" onsubmit="closeForm()">
-			    <h1>Add Food</h1>
-
-			    <label for="food"><b>Food:</b></label>
-			    <input type="text" placeholder="Enter Food" name="food" required>
-
-			    <label for="kCals"><b>kCals:</b></label>
-			    <input type="text" placeholder="Enter Calories" name="kCals" required>
-
-			    <div class={FormBtns}>
-			    	<button type="submit">Add</button>
-			    	<button type="button" onclick="closeForm()">Close</button>
-				</div>
-			</form>
+				    	<label for="kCals"><b>kCals:</b></label>
+				    	<input class={Input} type="text" placeholder="Enter Calories" name="kCals" required>
+				    </div>
+				    <div class={FormBtnContainer}>
+				    	<button class={FormBtn} type="submit">Add</button>
+				    	<button class={FormBtn} type="button" onclick="closeAddForm()">Close</button>
+					</div>
+				</form>
+			</div>
 		</div>
 
 		<script>
-			function openForm() {
+			function openAddForm() {
 			    document.getElementById("myForm").style.display = "block";
 				document.getElementById("overlay").style.display = "block";
 			}
 
-			function closeForm() {
+			function closeAddForm() {
   			 	document.getElementById("myForm").style.display = "none";
 				document.getElementById("overlay").style.display = "none";
 			}
 		</script>
 	</div>
+}
+
+
+templ DelButton(text string) {
+	<button class={Btn} onclick="openDelForm()">
+		{text}
+	</button>
+
+	<div class={Overlay} id="overlay">
+		<div class={FormContainer}>
+			<div class={FormPopup} id="myForm">
+			    <form action="/addFood" method="POST" onsubmit="closeAddForm()">
+				    <h1 class={FormTitle}>Add Food</h1>
+				    <div class={FormFields}>
+				    	<label for="food"><b>Food:</b></label>
+				    	<input class={Input} type="text" placeholder="Enter Food" name="food" required>
+
+				    	<label for="kCals"><b>kCals:</b></label>
+				    	<input class={Input} type="text" placeholder="Enter Calories" name="kCals" required>
+				    </div>
+				    <div class={FormBtnContainer}>
+				    	<button class={FormBtn} type="submit">Add</button>
+				    	<button class={FormBtn} type="button" onclick="closeAddForm()">Close</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script>
+			function openDelForm() {
+			    document.getElementById("myForm").style.display = "block";
+				document.getElementById("overlay").style.display = "block";
+			}
+
+			function closeDelForm() {
+  			 	document.getElementById("myForm").style.display = "none";
+				document.getElementById("overlay").style.display = "none";
+			}
+		</script>
+	</div>
+}
+
+templ FoodItem(food database.Food) {
+    <div >
+        <span >{food.Name}: </span>
+        <span >{strconv.Itoa(food.Calories)} kCal</span>
+    </div>
+}
+
+templ FoodDisplay(foods []database.Food) {
+    <div >
+        if len(foods) == 0 {
+            <p>No foods added yet!</p>
+        } else {
+            for _, food := range foods {
+                @FoodItem(food)
+            }
+        }
+    </div>
 }

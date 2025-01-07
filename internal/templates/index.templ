@@ -3,6 +3,7 @@ package templates
 import (
     "time"
     "strconv"
+    "github.com/cameronek/Calorific/internal/database"
 )
 
 css HomeTitle() {
@@ -37,7 +38,6 @@ css CalorieContainer() {
     margin: 60px;
     justify-content: center;
     align-items: center;
-
 }
 
 templ Index() {
@@ -59,8 +59,7 @@ templ Index() {
         </div>
         <div class={CalorieContainer}>
             @AddButton("Add Food"){}
+            @FoodDisplay(ctx.Value("foods").([]database.Food)){}
         </div>
-
-
 	}
 }
