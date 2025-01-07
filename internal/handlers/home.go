@@ -68,3 +68,30 @@ func AddFoodHandler(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
+
+func DeleteFoodHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not a post request", http.StatusMethodNotAllowed)
+		return
+	}
+
+	foodID := r.FormValue("foodID")
+	id, err := strconv.ParseInt(foodID, 10, 64)
+	if err != nil {
+		http.Error(w, "Invalid food ID", http.StatusBadRequest)
+		return
+	}
+
+	db, err := database.Initialize("./calorific.db")
+	if err != nil {
+		http.Error(w, "Database error", http.StatusInternalServerError)
+	}
+
+	_, err = db.Exec("DELETE FROM food WHERE id = ?", id)
+	if err != nil {
+		http.Error(w, "Failed to delete food", http.StatusInternalServerError)
+		return
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+
+}

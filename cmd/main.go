@@ -26,6 +26,9 @@ func main() {
 	// POST: Add food route
 	mux.HandleFunc("/addFood", handlers.AddFoodHandler)
 
+	// DELETE: Delete food route
+	mux.HandleFunc("/deleteFood", handlers.DeleteFoodHandler)
+
 	// Static route
 	static := http.FileServer(http.Dir("static"))
 

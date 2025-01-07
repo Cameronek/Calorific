@@ -2,8 +2,8 @@ package templates
 
 import (
 	"github.com/cameronek/Calorific/internal/database"
-	"github.com/cameronek/Calorific/internal/database"
 	"strconv"
+	"fmt"
 )
 
 css Btn() {
@@ -138,40 +138,28 @@ templ AddButton(text string) {
 }
 
 
-templ DelButton(text string) {
+templ DelButton(text string, foods []database.Food) {
 	<button class={Btn} onclick="openDelForm()">
 		{text}
 	</button>
 
-	<div class={Overlay} id="overlay">
+	<div class={Overlay} id="overlayDel">
 		<div class={FormContainer}>
-			<div class={FormPopup} id="myForm">
-			    <form action="/addFood" method="POST" onsubmit="closeAddForm()">
-				    <h1 class={FormTitle}>Add Food</h1>
-				    <div class={FormFields}>
-				    	<label for="food"><b>Food:</b></label>
-				    	<input class={Input} type="text" placeholder="Enter Food" name="food" required>
-
-				    	<label for="kCals"><b>kCals:</b></label>
-				    	<input class={Input} type="text" placeholder="Enter Calories" name="kCals" required>
-				    </div>
-				    <div class={FormBtnContainer}>
-				    	<button class={FormBtn} type="submit">Add</button>
-				    	<button class={FormBtn} type="button" onclick="closeAddForm()">Close</button>
-					</div>
-				</form>
+			<div class={FormPopup} id="myFoodDisplay">
+			    @FoodDisplay(foods){}
+				<button class={FormBtn} type="button" onclick="closeDelForm()">Close</button>
 			</div>
 		</div>
 
 		<script>
 			function openDelForm() {
-			    document.getElementById("myForm").style.display = "block";
-				document.getElementById("overlay").style.display = "block";
+			    document.getElementById("myFoodDisplay").style.display = "block";
+				document.getElementById("overlayDel").style.display = "block";
 			}
 
 			function closeDelForm() {
-  			 	document.getElementById("myForm").style.display = "none";
-				document.getElementById("overlay").style.display = "none";
+  			 	document.getElementById("myFoodDisplay").style.display = "none";
+				document.getElementById("overlayDel").style.display = "none";
 			}
 		</script>
 	</div>
@@ -181,6 +169,7 @@ templ FoodItem(food database.Food) {
     <div >
         <span >{food.Name}: </span>
         <span >{strconv.Itoa(food.Calories)} kCal</span>
+        @DeleteFoodItemButton(food){}
     </div>
 }
 
@@ -194,4 +183,17 @@ templ FoodDisplay(foods []database.Food) {
             }
         }
     </div>
+}
+
+templ DeleteFoodItemButton(food database.Food) {
+	    <form 
+        method="POST" 
+        action="/deleteFood" 
+        class="inline" 
+        onsubmit="return confirm('Are you sure you want to delete this food?')">
+        <input type="hidden" name="foodID" value={fmt.Sprint(food.ID)} />
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+            Delete
+        </button>
+    </form>
 }

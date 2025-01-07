@@ -59,7 +59,7 @@ templ Index() {
         </div>
         <div class={CalorieContainer}>
             @AddButton("Add Food"){}
-            @FoodDisplay(ctx.Value("foods").([]database.Food)){}
+            @DelButton("Delete Food", ctx.Value("foods").([]database.Food)){}
         </div>
 	}
 }
