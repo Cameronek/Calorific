@@ -35,7 +35,7 @@ css DateContainer() {
 css CalorieContainer() {
     display: flex;
     gap: 60px;
-    margin: 60px;
+    margin: 30px;
     justify-content: center;
     align-items: center;
 }
@@ -58,8 +58,8 @@ templ Index() {
             @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day())){}
         </div>
         <div class={CalorieContainer}>
-            @AddButton("Add Food"){}
-            @DelButton("Delete Food", ctx.Value("foods").([]database.Food)){}
+            @AddButton("Add Food Item"){}
+            @DelButton("Delete Food Item", ctx.Value("foods").([]database.Food)){}
         </div>
 	}
 }

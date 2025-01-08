@@ -53,7 +53,7 @@ func CalorieContainer() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
 	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`gap:60px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`margin:60px;`)
+	templ_7745c5c3_CSSBuilder.WriteString(`margin:30px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
 	templ_7745c5c3_CSSID := templ.CSSID(`CalorieContainer`, templ_7745c5c3_CSSBuilder.String())
@@ -190,11 +190,11 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = AddButton("Add Food").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = AddButton("Add Food Item").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DelButton("Delete Food", ctx.Value("foods").([]database.Food)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DelButton("Delete Food Item", ctx.Value("foods").([]database.Food)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
