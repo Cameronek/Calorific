@@ -1,4 +1,4 @@
-***Calorific*** is a local webapp written entirely in Go, using Templ templates for its frontend. 
+***Calorific*** is a single page, local webapp written entirely in Go, using Templ templates for its frontend. 
 
 This project was built mostly because I wanted minimalist calorie tracking app and I could not find a decent free app that I liked.
 

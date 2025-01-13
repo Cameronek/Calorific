@@ -84,7 +84,7 @@ func createTables(db *sql.DB) error {
 
 
 func GetFoods(db *DB) ([]Food, error) {
-	rows, err := db.Query("SELECT * FROM food")
+	rows, err := db.Query("SELECT * FROM food ORDER BY calories ASC")
 	if err != nil {
 		return nil, err
 	}

@@ -24,7 +24,6 @@ func Btn() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder.WriteString(`padding:16px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`font-size:2vw;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`width:20vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`height:10vh;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`cursor:pointer;`)
 	templ_7745c5c3_CSSID := templ.CSSID(`Btn`, templ_7745c5c3_CSSBuilder.String())
 	return templ.ComponentCSSClass{
@@ -248,7 +247,7 @@ func AddButton(text string) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 128, Col: 7}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 127, Col: 7}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -528,7 +527,7 @@ func DelButton(text string, foods []database.Food) templ.Component {
 		var templ_7745c5c3_Var28 string
 		templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 168, Col: 7}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 167, Col: 7}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 		if templ_7745c5c3_Err != nil {
@@ -788,7 +787,7 @@ func FoodItem(food database.Food) templ.Component {
 		var templ_7745c5c3_Var47 string
 		templ_7745c5c3_Var47, templ_7745c5c3_Err = templ.JoinStringErrs(food.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 210, Col: 27}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 209, Col: 27}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var47))
 		if templ_7745c5c3_Err != nil {
@@ -801,7 +800,7 @@ func FoodItem(food database.Food) templ.Component {
 		var templ_7745c5c3_Var48 string
 		templ_7745c5c3_Var48, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(food.Calories))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 210, Col: 62}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 209, Col: 62}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var48))
 		if templ_7745c5c3_Err != nil {
@@ -851,7 +850,7 @@ func DeleteFoodItemButton(food database.Food) templ.Component {
 		var templ_7745c5c3_Var50 string
 		templ_7745c5c3_Var50, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprint(food.ID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 221, Col: 69}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/buttons.templ`, Line: 220, Col: 69}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var50))
 		if templ_7745c5c3_Err != nil {

@@ -1,0 +1,124 @@
+package templates
+
+css TargetFrame() {
+	background-color: #4254f5;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+}
+
+css TargetDateBox() {
+	background-color: #fff;
+	color: #000;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 1px 1px black;
+
+	height: 6vw;
+	width: 6vw;
+
+	margin: 1.5vw;
+
+	font-size: 4vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+css TargetCalorieBox() {
+	background-color: #34a1eb;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 1px 1px black;
+
+	width: 30vw;
+
+	margin: 1.5vw;
+
+	font-size: 4vw;
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+css Row() {
+	display: flex;
+	flex-direction: row;
+}
+
+css Center() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+css EditButton() {
+	background-color: #6473ed;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+	padding: 8px;
+	margin: 1.5vw;
+
+	font-size: 2vw;
+	width: 24vw;
+
+	cursor: pointer;
+}
+
+css Line() {
+    margin: 8px auto;
+    width: 50%;
+	height: 4px;
+	background-color: currentColor;
+	border: none;
+}
+
+css TargetCalorieTitle() {
+	font-family: Georgia, sans-serif;
+	font-weight: bold;
+	color: #fff;
+    text-shadow: 2px 2px 2px #000000;   
+    background-color: #34a1eb;
+}
+
+templ Target(day string, text string, cals string, target string) {
+	<div class={TargetFrame}>
+		<div class={Row}>
+			<!-- Add column for check/X -->
+			<div class={TargetDateBox}>
+				<span class={DateText}>{day}</span>
+			</div>
+
+			<!-- Add column for check/X -->
+			@TargetCalories(cals, target){}
+		</div>
+		<div class={Center}>
+			<button class={EditButton}>{text}</button>
+		</div>
+	</div>
+}
+
+
+templ TargetCalories(cals string, target string) {
+    <div class={TargetCalorieBox}>
+        <span class={TargetCalorieTitle}>Kcals</span>
+        <br/>
+        <span>{cals}</span>
+        <br/>
+        <hr class={Line} />
+        <span>{target}</span>
+        <br/>
+    </div>
+}
+templ EditTargetButton() {
+
+}
