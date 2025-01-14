@@ -26,6 +26,9 @@ func main() {
 	// POST: Add food route
 	mux.HandleFunc("/addFood", handlers.AddFoodHandler)
 
+	// POST: Edit Calorie Target
+	mux.HandleFunc("/editTarget", handlers.EditTargetHandler)
+
 	// DELETE: Delete food route
 	mux.HandleFunc("/deleteFood", handlers.DeleteFoodHandler)
 

@@ -39,6 +39,7 @@ css TargetCalorieBox() {
 	width: 30vw;
 
 	margin: 1.5vw;
+	padding-bottom: 1vh;
 
 	font-size: 4vw;
 	display: inline-block;
@@ -66,10 +67,10 @@ css EditButton() {
 	border-radius: 8px;
 	box-shadow: 0px 2px 2px black;
 	padding: 8px;
-	margin: 1.5vw;
+	margin: 1vw;
 
 	font-size: 2vw;
-	width: 24vw;
+	width: 16vw;
 
 	cursor: pointer;
 }
@@ -90,7 +91,7 @@ css TargetCalorieTitle() {
     background-color: #34a1eb;
 }
 
-templ Target(day string, text string, cals string, target string) {
+templ Target(day string, cals string, target string) {
 	<div class={TargetFrame}>
 		<div class={Row}>
 			<!-- Add column for check/X -->
@@ -102,7 +103,8 @@ templ Target(day string, text string, cals string, target string) {
 			@TargetCalories(cals, target){}
 		</div>
 		<div class={Center}>
-			<button class={EditButton}>{text}</button>
+			<button class={EditButton}>Add kCals</button>
+			@EditTargetButton(day){}
 		</div>
 	</div>
 }
@@ -110,7 +112,7 @@ templ Target(day string, text string, cals string, target string) {
 
 templ TargetCalories(cals string, target string) {
     <div class={TargetCalorieBox}>
-        <span class={TargetCalorieTitle}>Kcals</span>
+        <span class={TargetCalorieTitle}>kCals</span>
         <br/>
         <span>{cals}</span>
         <br/>
@@ -119,6 +121,40 @@ templ TargetCalories(cals string, target string) {
         <br/>
     </div>
 }
-templ EditTargetButton() {
 
+templ EditTargetButton(day string) {
+	<button class={EditButton} onclick="openEditForm()">
+		Edit Target
+	</button>
+
+	<div class={Overlay} id="overlayEdit">
+		<div class={FormContainer}>
+			<div class={FormPopup} id="myTarget">
+			    <form action="/editTarget" method="POST" onsubmit="closeEditForm()">
+				    <h1 class={FormTitle}>Edit Target Calories</h1>
+				    <div class={FormFields}>
+				    	<label for="kCals"><b>New Target:</b></label>
+				    	<input class={Input} type="text" placeholder="Update Target" name="kCals" required>
+				    	<input type="hidden" name="date" value={day} >
+				    </div>
+				    <div class={FormBtnContainer}>
+				    	<button class={FormBtn} type="submit">Edit</button>
+				    	<button class={FormBtn} type="button" onclick="closeEditForm()">Close</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script>
+			function openEditForm() {
+			    document.getElementById("myTarget").style.display = "block";
+				document.getElementById("overlayEdit").style.display = "block";
+			}
+
+			function closeEditForm() {
+  			 	document.getElementById("myTarget").style.display = "none";
+				document.getElementById("overlayEdit").style.display = "none";
+			}
+		</script>
+	</div>
 }

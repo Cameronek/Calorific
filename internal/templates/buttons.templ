@@ -99,6 +99,7 @@ css FormBtn() {
     cursor: pointer;
     border: 1px solid black;
 	border-radius: 4px;
+	margin-top: 4px;
 }
 
 css FormTitle() {
@@ -129,7 +130,7 @@ templ AddButton(text string) {
 
 	<div class={Overlay} id="overlay">
 		<div class={FormContainer}>
-			<div class={FormPopup} id="myForm">
+			<div class={FormPopup} id="myAddFood">
 			    <form action="/addFood" method="POST" onsubmit="closeAddForm()">
 				    <h1 class={FormTitle}>Add Food Item</h1>
 				    <div class={FormFields}>
@@ -149,12 +150,12 @@ templ AddButton(text string) {
 
 		<script>
 			function openAddForm() {
-			    document.getElementById("myForm").style.display = "block";
+			    document.getElementById("myAddFood").style.display = "block";
 				document.getElementById("overlay").style.display = "block";
 			}
 
 			function closeAddForm() {
-  			 	document.getElementById("myForm").style.display = "none";
+  			 	document.getElementById("myAddFood").style.display = "none";
 				document.getElementById("overlay").style.display = "none";
 			}
 		</script>

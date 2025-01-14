@@ -190,7 +190,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = Target(strconv.Itoa(time.Now().Day()), "Edit Target", "1000", "1800").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = Target(strconv.Itoa(time.Now().Day()), "1000", ctx.Value("target").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -49,6 +49,12 @@ func Initialize(dbPath string) (*DB, error) {
 		return nil, err
 	}
 
+	err = createEntries(sqliteDB)
+	if err != nil {
+		log.Println("Could not initialize dates.")
+		return nil, err
+	}
+
 	// Return pointer to DB struct and error (nil = no error)
 	return &DB{sqliteDB}, nil
 }
@@ -82,6 +88,32 @@ func createTables(db *sql.DB) error {
 	return err
 }
 
+// Ensure that entries for calories exist for the past 7 days 
+// Uses default 2000, 0 in cases where the app was not used
+func createEntries(db *sql.DB) error {
+	createEntriesSQL := `
+		WITH RECURSIVE dates(date) AS (
+		  SELECT DATE('now', '-6 days')
+		  UNION ALL
+		  SELECT DATE(date, '+1 days')
+		  FROM dates
+		  WHERE date < DATE('now')
+		),
+		missing_dates AS (
+		  SELECT dates.date
+		  FROM dates
+		  LEFT JOIN dailyGoal ON DATE(dailyGoal.date) = dates.date
+		  WHERE dailyGoal.id IS NULL
+		)
+		INSERT INTO dailyGoal (goalCalories, consumedCalories, date)
+		SELECT 2000, 0, date
+		FROM missing_dates;
+	`
+
+	_, err := db.Exec(createEntriesSQL)
+	return err
+}
+
 
 func GetFoods(db *DB) ([]Food, error) {
 	rows, err := db.Query("SELECT * FROM food ORDER BY calories ASC")
@@ -102,6 +134,17 @@ func GetFoods(db *DB) ([]Food, error) {
 	}
 
 	return foods, nil
+}
+
+func GetTarget(db *DB) (target int, err error ) {
+
+	err = db.QueryRow("SELECT goalCalories FROM dailyGoal ORDER BY id DESC").Scan(&target)
+
+	if err != nil {
+		return 1000, err
+	}
+	// Default return 2000 in case where a target is not found
+	return target, nil
 }
 
 // Close DB connection (use pointer receiver such that actual DB is closed)

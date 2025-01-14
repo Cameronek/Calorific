@@ -59,7 +59,7 @@ templ Index() {
         </div>
 
         <div class={CalorieContainer}>
-            @Target(strconv.Itoa(time.Now().Day()), "Edit Target", "1000", "1800"){}
+            @Target(strconv.Itoa(time.Now().Day()), "1000", ctx.Value("target").(string)){}
         </div>
 
         <div class={CalorieContainer}>
