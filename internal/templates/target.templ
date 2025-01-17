@@ -1,5 +1,10 @@
 package templates
 
+import (
+	"github.com/cameronek/Calorific/internal/database"
+	"strconv"
+)
+
 css TargetFrame() {
 	background-color: #4254f5;
 	color: #fff;
@@ -38,8 +43,8 @@ css TargetCalorieBox() {
 
 	width: 30vw;
 
-	margin: 1.5vw;
 	padding-bottom: 1vh;
+	margin: 1.5vw 1.5vw 0vw 0vw;
 
 	font-size: 4vw;
 	display: inline-block;
@@ -53,13 +58,19 @@ css Row() {
 	flex-direction: row;
 }
 
+css Col() {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 css Center() {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-css EditButton() {
+css EditCaloriesButton() {
 	background-color: #6473ed;
 	color: #fff;
 
@@ -71,6 +82,22 @@ css EditButton() {
 
 	font-size: 2vw;
 	width: 16vw;
+
+	cursor: pointer;
+}
+
+css TargetButton() {
+	background-color: #6473ed;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+	padding: 4px;
+	margin: 1.5vw;
+
+	font-size: 1.25vw;
+	width: 6vw;
 
 	cursor: pointer;
 }
@@ -91,20 +118,34 @@ css TargetCalorieTitle() {
     background-color: #34a1eb;
 }
 
+css Goal() {
+	font-size: 1.5vw;
+}
+
 templ Target(day string, cals string, target string) {
+	{{targetInt, err := strconv.Atoi(target)
+	  	if err != nil {
+	  		panic(err)
+	  }}}
+
 	<div class={TargetFrame}>
 		<div class={Row}>
 			<!-- Add column for check/X -->
-			<div class={TargetDateBox}>
-				<span class={DateText}>{day}</span>
+			<div class={Col}>
+				<div class={TargetDateBox}>
+					<span class={DateText}>{day}</span>
+				</div>
+				@MetGoalButton(ctx.Value("sum0").(int), targetInt){}
+				<div class={Center}>
+					@EditTargetButton(day){}
+				</div>
 			</div>
-
 			<!-- Add column for check/X -->
 			@TargetCalories(cals, target){}
 		</div>
 		<div class={Center}>
-			<button class={EditButton}>Add kCals</button>
-			@EditTargetButton(day){}
+			@AddCalsButton(ctx.Value("foods").([]database.Food)){}
+			@DelCalsButton(ctx.Value("dailyFoods").([]database.Food)){}
 		</div>
 	</div>
 }
@@ -114,16 +155,16 @@ templ TargetCalories(cals string, target string) {
     <div class={TargetCalorieBox}>
         <span class={TargetCalorieTitle}>kCals</span>
         <br/>
-        <span>{cals}</span>
+        <span class={VerdanaFont}>{cals}</span>
         <br/>
         <hr class={Line} />
-        <span>{target}</span>
+        <span class={VerdanaFont}>{target}</span>
         <br/>
     </div>
 }
 
 templ EditTargetButton(day string) {
-	<button class={EditButton} onclick="openEditForm()">
+	<button class={TargetButton} onclick="openEditForm()">
 		Edit Target
 	</button>
 
@@ -157,4 +198,73 @@ templ EditTargetButton(day string) {
 			}
 		</script>
 	</div>
+}
+
+templ AddCalsButton(foods []database.Food) {
+	<button class={EditCaloriesButton} onclick="openAddCalsForm()">
+		Add kCals
+	</button>
+
+	<div class={Overlay} id="overlayAddCals">
+		<div class={FormContainer}>
+			<div class={FormPopup} id="addCalsDisplay">
+				<h1 class={FormTitle}>Add Calories</h1>
+			    @FoodDisplay(foods, false, "food"){}
+			    <div class={FormBtnContainer_ReducedMargin}>
+					<button class={FormBtn} type="button" onclick="closeAddCalsForm()">Close</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function openAddCalsForm() {
+			    document.getElementById("addCalsDisplay").style.display = "block";
+				document.getElementById("overlayAddCals").style.display = "block";
+			}
+
+			function closeAddCalsForm() {
+  			 	document.getElementById("addCalsDisplay").style.display = "none";
+				document.getElementById("overlayAddCals").style.display = "none";
+			}
+		</script>
+	</div>
+}
+
+
+templ DelCalsButton(foods []database.Food) {
+	<button class={EditCaloriesButton} onclick="openDelCalsForm()">
+		Delete kCals
+	</button>
+
+	<div class={Overlay} id="overlayDelCals">
+		<div class={FormContainer}>
+			<div class={FormPopup} id="delCalsDisplay">
+				<h1 class={FormTitle}>Add Calories</h1>
+			    @FoodDisplay(foods, true, "cal"){}
+			    <div class={FormBtnContainer_ReducedMargin}>
+					<button class={FormBtn} type="button" onclick="closeDelCalsForm()">Close</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function openDelCalsForm() {
+			    document.getElementById("delCalsDisplay").style.display = "block";
+				document.getElementById("overlayDelCals").style.display = "block";
+			}
+
+			function closeDelCalsForm() {
+  			 	document.getElementById("delCalsDisplay").style.display = "none";
+				document.getElementById("overlayDelCals").style.display = "none";
+			}
+		</script>
+	</div>
+}
+
+templ MetGoalButton(sum int, target int) {
+	if sum >= target {
+		<span class={Goal}>&#128077</span>
+	} else {
+		<span class={Goal}>&#128078</span>
+	}
 }

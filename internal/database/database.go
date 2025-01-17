@@ -106,7 +106,14 @@ func createEntries(db *sql.DB) error {
 		  WHERE dailyGoal.id IS NULL
 		)
 		INSERT INTO dailyGoal (goalCalories, consumedCalories, date)
-		SELECT 2000, 0, date
+		SELECT 
+		    (SELECT goalCalories 
+		    FROM dailyGoal 
+		    WHERE dailyGoal.date <= missing_dates.date 
+		    ORDER BY dailyGoal.date DESC 
+		    LIMIT 1),
+		    0,
+		    date
 		FROM missing_dates;
 	`
 
@@ -136,15 +143,63 @@ func GetFoods(db *DB) ([]Food, error) {
 	return foods, nil
 }
 
-func GetTarget(db *DB) (target int, err error ) {
+func GetTarget(db *DB, day string) (target int, err error ) {
 
-	err = db.QueryRow("SELECT goalCalories FROM dailyGoal ORDER BY id DESC").Scan(&target)
+	err = db.QueryRow("SELECT goalCalories FROM dailyGoal WHERE strftime('%d', date) = ? ORDER BY id DESC LIMIT 1", day).Scan(&target)
 
 	if err != nil {
+		log.Println(err)
 		return 1000, err
 	}
 	// Default return 2000 in case where a target is not found
 	return target, nil
+}
+
+// Should insert this into dailyGoal table, however had trouble with these;
+// Skipping that step and doing direct aggregation
+func GetDailyConsumption(db *DB, day string)(sum int, err error) {
+	//rows, err := db.Query("SELECT calories FROM dailyConsumption WHERE date = DATE('now')")
+	rows, err := db.Query("SELECT calories FROM dailyConsumption WHERE strftime('%d', date) = ?", day)
+	if err != nil {
+		return 0, err
+	}
+	defer rows.Close()
+
+	if rows == nil {
+		return 0, nil
+	}
+
+	for rows.Next() {
+		var cals int
+		err := rows.Scan(&cals)
+		if err != nil {
+			return 0, err
+		}
+		sum += cals
+	}
+
+	return sum, nil
+}
+
+func GetDailyFoods(db *DB)([]Food, error) {
+	rows, err := db.Query("SELECT id, name, calories FROM dailyConsumption WHERE date = DATE('now')")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var foods []Food
+
+	for rows.Next() {
+		var food Food
+		err := rows.Scan(&food.ID, &food.Name, &food.Calories)
+		if err != nil {
+			return nil, err
+		}
+		foods = append(foods, food)
+	}
+
+	return foods, nil
 }
 
 // Close DB connection (use pointer receiver such that actual DB is closed)

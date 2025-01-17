@@ -6,10 +6,10 @@ import (
 	"github.com/cameronek/Calorific/internal/templates"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-
 	db, err := database.Initialize("./calorific.db")
 	if err != nil {
 		http.Error(w, "Database error", http.StatusInternalServerError)
@@ -23,19 +23,60 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error getting foods", http.StatusInternalServerError)
 	}
 
-	target, err := database.GetTarget(db)
+	targets := [7]string{}
+
+	for i := 0; i < 7; i++ {
+		target, err := database.GetTarget(db, strconv.Itoa(time.Now().AddDate(0, 0, -i).Day()))
+
+		targets[i] = strconv.Itoa(target)
+		if err != nil {
+			http.Error(w, "Invalid calorie input", http.StatusInternalServerError)
+			return
+		}
+	}
+
+/*
+	target, err := database.GetTarget(db, strconv.Itoa(time.Now().Day()))
 	if err != nil {
 		http.Error(w, "Error getting target", http.StatusInternalServerError)
 	}
+*/
 
-	targetStr := strconv.Itoa(target)
+	sums := [7]int{}
+
+	for i := 0; i < 7; i++ {
+		sum, err := database.GetDailyConsumption(db, strconv.Itoa(time.Now().AddDate(0,0,-i).Day()))
+		
+		sums[i] = sum
+		if err != nil {
+			http.Error(w, "Error getting daily calorie consumption", http.StatusInternalServerError)
+			return
+		}
+	}
+/*
+	sum, err := database.GetDailyConsumption(db)
 	if err != nil {
-		http.Error(w, "Invalid calorie input", http.StatusInternalServerError)
+		http.Error(w, "Error getting daily calorie consumption", http.StatusInternalServerError)
 		return
+	}
+*/
+	dailyFoods, err := database.GetDailyFoods(db)
+	if err != nil {
+		http.Error(w, "Error getting daily food consumption", http.StatusInternalServerError)
 	}
 
 	ctx := context.WithValue(context.Background(), "foods", foods)
-	ctx = context.WithValue(ctx, "target", targetStr)
+	//ctx = context.WithValue(ctx, "target", targetStr)
+	//ctx = context.WithValue(ctx, "sum", sum)
+	ctx = context.WithValue(ctx, "dailyFoods", dailyFoods)
+
+	for i := 0; i < len(targets); i++ {
+		ctx = context.WithValue(ctx, "target" + strconv.Itoa(i), targets[i])
+	}
+
+	for i := 0; i < len(targets); i++ {
+		ctx = context.WithValue(ctx, "sum" + strconv.Itoa(i), sums[i])
+	}
 
 	component := templates.Index()
 	component.Render(ctx, w)
@@ -107,6 +148,32 @@ func DeleteFoodHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
+func DeleteCalsHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Method not a post request", http.StatusMethodNotAllowed)
+		return
+	}
+
+	foodID := r.FormValue("foodID")
+	id, err := strconv.ParseInt(foodID, 10, 64)
+	if err != nil {
+		http.Error(w, "Invalid food ID", http.StatusBadRequest)
+		return
+	}
+
+	db, err := database.Initialize("./calorific.db")
+	if err != nil {
+		http.Error(w, "Database error", http.StatusInternalServerError)
+	}
+
+	_, err = db.Exec("DELETE FROM dailyConsumption WHERE id = ?", id)
+	if err != nil {
+		http.Error(w, "Failed to delete food", http.StatusInternalServerError)
+		return
+	}		
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
 func EditTargetHandler(w http.ResponseWriter, r *http.Request) {
 // If method passed in isnt a post request, error
 	if r.Method != http.MethodPost {
@@ -121,7 +188,7 @@ func EditTargetHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	calories, err := strconv.Atoi(r.FormValue("kCals"))
+	cals, err := strconv.Atoi(r.FormValue("kCals"))
 
 	if err != nil {
 		http.Error(w, "Invalid calorie input", http.StatusBadRequest)
@@ -137,11 +204,38 @@ func EditTargetHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer db.Close()
 
-	_, err = db.Exec("UPDATE dailyGoal SET goalCalories = ? WHERE id = (SELECT id FROM dailyGoal ORDER BY id DESC LIMIT 1) AND strftime('%d', date) = ?", calories, today)
+	_, err = db.Exec("UPDATE dailyGoal SET goalCalories = ? WHERE id = (SELECT id FROM dailyGoal ORDER BY id DESC LIMIT 1) AND strftime('%d', date) = ?", cals, today)
 	if err != nil {
 		http.Error(w, "Error editing target", http.StatusInternalServerError)
 		return
 	}
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)	
+}
+
+func AddCalsHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+	http.Error(w, "Method not a post request", http.StatusMethodNotAllowed)
+	return
+	}
+
+	name := r.FormValue("foodName")
+	foodCals := r.FormValue("foodCals")
+	cals, err := strconv.ParseInt(foodCals, 10, 64)
+	if err != nil {
+		http.Error(w, "Invalid calories", http.StatusBadRequest)
+		return
+	}
+
+	db, err := database.Initialize("./calorific.db")
+	if err != nil {
+		http.Error(w, "Database error", http.StatusInternalServerError)
+	}
+
+	_, err = db.Exec("INSERT INTO dailyConsumption (name, calories, date) VALUES (?, ?, DATE('now'))", name, cals)
+	if err != nil {
+		http.Error(w, "Failed to delete food", http.StatusInternalServerError)
+		return
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

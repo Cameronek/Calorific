@@ -15,7 +15,6 @@ css HomeTitle() {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 
-    padding: 10px;
     margin: 0 auto;
 
     text-align: center; 
@@ -50,16 +49,16 @@ templ Index() {
             </h1>
 		</div>
         <div class={DateContainer}>
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day())){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day())){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day())){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day())){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day())){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day())){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day()), ctx.Value("sum6").(int), ctx.Value("target6").(string)){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day()), ctx.Value("sum5").(int), ctx.Value("target5").(string)){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day()), ctx.Value("sum4").(int), ctx.Value("target4").(string)){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day()), ctx.Value("sum3").(int), ctx.Value("target3").(string)){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day()), ctx.Value("sum2").(int), ctx.Value("target2").(string)){}
+            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day()), ctx.Value("sum1").(int), ctx.Value("target1").(string)){}
         </div>
 
         <div class={CalorieContainer}>
-            @Target(strconv.Itoa(time.Now().Day()), "1000", ctx.Value("target").(string)){}
+            @Target(strconv.Itoa(time.Now().Day()), strconv.Itoa(ctx.Value("sum0").(int)), ctx.Value("target0").(string)){}
         </div>
 
         <div class={CalorieContainer}>

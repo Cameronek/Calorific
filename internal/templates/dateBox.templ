@@ -1,5 +1,9 @@
 package templates
 
+import (
+	"strconv"
+)
+
 css OuterBox() {
 	background-color: #6473ed;
 	color: #FFF;
@@ -8,7 +12,9 @@ css OuterBox() {
 	border-radius: 8px;
 	box-shadow: 0px 2px 2px black;
 
-	height: 9vw;
+	padding-top: 0.5vw;
+
+	height: 10vw;
 	width: 9vw;
 
 	display: flex;
@@ -28,7 +34,7 @@ css InnerBox() {
 
 	height: 6vw;
 	width: 6vw;
-	transform: translateY(-10%);
+	transform: translateY(-5%);
 
 	font-size: 4vw;
 	display: flex;
@@ -42,10 +48,24 @@ css DateText() {
 	text-align: center;
 }
 
-templ DateBox(day string) {
+templ DateBox(day string, sum int, targetStr string) {
+	<!-- Do not have to handle error since we know it is an int from when we added the context 
+			@MetGoalButton(ctx.Value("sum").(int), target)
+
+-->
+
+	{{target, err := strconv.Atoi(targetStr)
+	  if err != nil {
+	  	panic(err)
+	  }}}
+
 	<div class={OuterBox}>
-		<div class={InnerBox}>
-			<span class={DateText}>{day}</span>
+		<div class={Col}>
+			<div class={InnerBox}>
+				<span class={DateText}>{day}</span>
+			</div>
+			<!-- @MetGoalButton(ctx.Value("sum0").(int), target) -->
+			@MetGoalButton(sum, target)
 		</div>
 	</div>
 }

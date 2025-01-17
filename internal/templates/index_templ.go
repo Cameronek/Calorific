@@ -22,7 +22,6 @@ func HomeTitle() templ.CSSClass {
 	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-bottom-left-radius:8px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`border-bottom-right-radius:8px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`padding:10px;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`margin:0 auto;`)
 	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center; 
 
@@ -140,27 +139,27 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day())).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day()), ctx.Value("sum6").(int), ctx.Value("target6").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day())).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day()), ctx.Value("sum5").(int), ctx.Value("target5").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day())).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day()), ctx.Value("sum4").(int), ctx.Value("target4").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day())).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day()), ctx.Value("sum3").(int), ctx.Value("target3").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day())).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day()), ctx.Value("sum2").(int), ctx.Value("target2").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day())).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day()), ctx.Value("sum1").(int), ctx.Value("target1").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -190,7 +189,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = Target(strconv.Itoa(time.Now().Day()), "1000", ctx.Value("target").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = Target(strconv.Itoa(time.Now().Day()), strconv.Itoa(ctx.Value("sum0").(int)), ctx.Value("target0").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
