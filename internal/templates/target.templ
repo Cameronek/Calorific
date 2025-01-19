@@ -148,6 +148,7 @@ templ Target(day string, cals string, target string) {
 			@DelCalsButton(ctx.Value("dailyFoods").([]database.Food)){}
 		</div>
 	</div>
+	@Streak(ctx.Value("streak").(int)){}
 }
 
 
@@ -239,7 +240,7 @@ templ DelCalsButton(foods []database.Food) {
 	<div class={Overlay} id="overlayDelCals">
 		<div class={FormContainer}>
 			<div class={FormPopup} id="delCalsDisplay">
-				<h1 class={FormTitle}>Add Calories</h1>
+				<h1 class={FormTitle}>Delete Calories</h1>
 			    @FoodDisplay(foods, true, "cal"){}
 			    <div class={FormBtnContainer_ReducedMargin}>
 					<button class={FormBtn} type="button" onclick="closeDelCalsForm()">Close</button>
@@ -266,5 +267,13 @@ templ MetGoalButton(sum int, target int) {
 		<span class={Goal}>&#128077</span>
 	} else {
 		<span class={Goal}>&#128078</span>
+	}
+}
+
+templ Streak(streak int) {
+	if streak == 0 {
+		<span>Eat more to reach your goal!</span>
+	} else if streak == 1 {
+		<span>You are on a {strconv.Itoa(streak)} day streak!</span>
 	}
 }
