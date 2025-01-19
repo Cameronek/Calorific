@@ -122,6 +122,11 @@ css Goal() {
 	font-size: 1.5vw;
 }
 
+css StreakText() {
+	font-size: 36px;
+	font-family: Verdana;
+}
+
 templ Target(day string, cals string, target string) {
 	{{targetInt, err := strconv.Atoi(target)
 	  	if err != nil {
@@ -135,7 +140,7 @@ templ Target(day string, cals string, target string) {
 				<div class={TargetDateBox}>
 					<span class={DateText}>{day}</span>
 				</div>
-				@MetGoalButton(ctx.Value("sum0").(int), targetInt){}
+				@MetGoal(ctx.Value("sum0").(int), targetInt){}
 				<div class={Center}>
 					@EditTargetButton(day){}
 				</div>
@@ -148,7 +153,6 @@ templ Target(day string, cals string, target string) {
 			@DelCalsButton(ctx.Value("dailyFoods").([]database.Food)){}
 		</div>
 	</div>
-	@Streak(ctx.Value("streak").(int)){}
 }
 
 
@@ -262,7 +266,7 @@ templ DelCalsButton(foods []database.Food) {
 	</div>
 }
 
-templ MetGoalButton(sum int, target int) {
+templ MetGoal(sum int, target int) {
 	if sum >= target {
 		<span class={Goal}>&#128077</span>
 	} else {
@@ -272,8 +276,12 @@ templ MetGoalButton(sum int, target int) {
 
 templ Streak(streak int) {
 	if streak == 0 {
-		<span>Eat more to reach your goal!</span>
-	} else if streak == 1 {
-		<span>You are on a {strconv.Itoa(streak)} day streak!</span>
+		<span class={StreakText}>Eat more to reach your goal!</span>
+	} else {
+		<div>
+			<span class={StreakText}>{strconv.Itoa(streak)}</span>
+			<img src="static/images/CalorificFire.png"/>
+			<span class={StreakText}>&nbsp;day streak!</span>
+		</div>
 	}
 }

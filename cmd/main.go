@@ -35,6 +35,7 @@ func main() {
 	// POST: Add food to daily calorie consumption
 	mux.HandleFunc("/addCals", handlers.AddCalsHandler)
 
+	// DELETE: Delete consumed calories
 	mux.HandleFunc("/deleteCals", handlers.DeleteCalsHandler)
 
 	// Static route

@@ -50,7 +50,7 @@ css DateText() {
 
 templ DateBox(day string, sum int, targetStr string) {
 	<!-- Do not have to handle error since we know it is an int from when we added the context 
-			@MetGoalButton(ctx.Value("sum").(int), target)
+			@MetGoal(ctx.Value("sum").(int), target)
 
 -->
 
@@ -64,8 +64,8 @@ templ DateBox(day string, sum int, targetStr string) {
 			<div class={InnerBox}>
 				<span class={DateText}>{day}</span>
 			</div>
-			<!-- @MetGoalButton(ctx.Value("sum0").(int), target) -->
-			@MetGoalButton(sum, target)
+			<!-- @MetGoal(ctx.Value("sum0").(int), target) -->
+			@MetGoal(sum, target)
 		</div>
 	</div>
 }

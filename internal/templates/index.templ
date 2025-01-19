@@ -57,6 +57,10 @@ templ Index() {
             @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day()), ctx.Value("sum1").(int), ctx.Value("target1").(string)){}
         </div>
 
+        <div class={DateContainer}>
+            @Streak(ctx.Value("streak").(int)){}
+        </div>
+
         <div class={CalorieContainer}>
             @Target(strconv.Itoa(time.Now().Day()), strconv.Itoa(ctx.Value("sum0").(int)), ctx.Value("target0").(string)){}
         </div>

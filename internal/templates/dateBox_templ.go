@@ -87,7 +87,7 @@ func DateBox(day string, sum int, targetStr string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Do not have to handle error since we know it is an int from when we added the context \r\n\t\t\t@MetGoalButton(ctx.Value(\"sum\").(int), target)\r\n\r\n-->")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Do not have to handle error since we know it is an int from when we added the context \r\n\t\t\t@MetGoal(ctx.Value(\"sum\").(int), target)\r\n\r\n-->")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -192,11 +192,11 @@ func DateBox(day string, sum int, targetStr string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div><!-- @MetGoalButton(ctx.Value(\"sum0\").(int), target) -->")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div><!-- @MetGoal(ctx.Value(\"sum0\").(int), target) -->")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = MetGoalButton(sum, target).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = MetGoal(sum, target).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
