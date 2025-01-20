@@ -3,10 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
-
 	"github.com/cameronek/Calorific/internal/database"
 	"github.com/cameronek/Calorific/internal/handlers"
-	//"path/filepath"
 )
 
 func main() {

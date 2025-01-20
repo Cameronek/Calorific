@@ -1,0 +1,25 @@
+package templates
+
+import (
+	"strconv"
+)
+
+templ MetGoal(sum int, target int) {
+	if sum >= target {
+		<span class={Goal}>&#128077</span>
+	} else {
+		<span class={Goal}>&#128078</span>
+	}
+}
+
+templ Streak(streak int) {
+	if streak == 0 {
+		<span class={StreakText}>Eat more to reach your goal!</span>
+	} else {
+		<div>
+			<span class={StreakText}>{strconv.Itoa(streak)}</span>
+			<img src="static/images/CalorificFire.png"/>
+			<span class={StreakText}>&nbsp;day streak!</span>
+		</div>
+	}
+}

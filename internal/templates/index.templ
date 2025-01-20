@@ -6,38 +6,6 @@ import (
     "github.com/cameronek/Calorific/internal/database"
 )
 
-css HomeTitle() {
-    color: #FFFFFF;
-    text-shadow: 2px 2px 2px #000000;   
-    background-color: #4254f5;
-
-    border:2px solid black;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-
-    margin: 0 auto;
-
-    text-align: center; 
-
-    vertical-align: text-bottom;
-}
-
-css DateContainer() {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin: 30px;
-}
-
-css CalorieContainer() {
-    display: flex;
-    gap: 60px;
-    margin: 30px;
-    justify-content: center;
-    align-items: center;
-}
 
 templ Index() {
 	@Base("Calorific - Home Page") {
@@ -49,23 +17,23 @@ templ Index() {
             </h1>
 		</div>
         <div class={DateContainer}>
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day()), ctx.Value("sum6").(int), ctx.Value("target6").(string)){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day()), ctx.Value("sum5").(int), ctx.Value("target5").(string)){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day()), ctx.Value("sum4").(int), ctx.Value("target4").(string)){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day()), ctx.Value("sum3").(int), ctx.Value("target3").(string)){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day()), ctx.Value("sum2").(int), ctx.Value("target2").(string)){}
-            @DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day()), ctx.Value("sum1").(int), ctx.Value("target1").(string)){}
+            @DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -6).Day()), ctx.Value("sum6").(int), ctx.Value("target6").(string)){}
+            @DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -5).Day()), ctx.Value("sum5").(int), ctx.Value("target5").(string)){}
+            @DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -4).Day()), ctx.Value("sum4").(int), ctx.Value("target4").(string)){}
+            @DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -3).Day()), ctx.Value("sum3").(int), ctx.Value("target3").(string)){}
+            @DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -2).Day()), ctx.Value("sum2").(int), ctx.Value("target2").(string)){}
+            @DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -1).Day()), ctx.Value("sum1").(int), ctx.Value("target1").(string)){}
         </div>
 
         <div class={DateContainer}>
             @Streak(ctx.Value("streak").(int)){}
         </div>
 
-        <div class={CalorieContainer}>
-            @Target(strconv.Itoa(time.Now().Day()), strconv.Itoa(ctx.Value("sum0").(int)), ctx.Value("target0").(string)){}
+        <div class={FoodAndCalorieContainer}>
+            @Target(strconv.Itoa(time.Now().UTC().Day()), strconv.Itoa(ctx.Value("sum0").(int)), ctx.Value("target0").(string)){}
         </div>
 
-        <div class={CalorieContainer}>
+        <div class={FoodAndCalorieContainer}>
             @AddButton("Add Food"){}
             @DelButton("Delete Food", ctx.Value("foods").([]database.Food)){}
         </div>

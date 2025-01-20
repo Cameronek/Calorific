@@ -6,7 +6,10 @@ Since it was something I wanted to build, I figured I might as well use it and a
 
 
 Anyways, in order to run this project for yourself if you wanted to try it out for some reason, after cloning simply:
-* *(Recommended)* Delete calorific.db file 
+
+* Install Go version 1.23.4 
+* Ensure dependencies needed from within the go mod file are installed
+* *(Recommended)* Delete calorific.db file
 * Execute make in the project directory
 * Navigate to *localhost:8082*
 

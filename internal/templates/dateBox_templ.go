@@ -12,60 +12,6 @@ import (
 	"strconv"
 )
 
-func OuterBox() templ.CSSClass {
-	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#6473ed;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFF;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border-radius:8px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`box-shadow:0px 2px 2px black;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`padding-top:0.5vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`height:10vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`width:9vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`flex-direction:row;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`OuterBox`, templ_7745c5c3_CSSBuilder.String())
-	return templ.ComponentCSSClass{
-		ID:    templ_7745c5c3_CSSID,
-		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
-	}
-}
-
-func InnerBox() templ.CSSClass {
-	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`background-color:#fff;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`color:#000;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border-radius:8px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`box-shadow:0px 1px 1px black;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`height:6vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`width:6vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`transform:translateY(-5%);`)
-	templ_7745c5c3_CSSBuilder.WriteString(`font-size:4vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`InnerBox`, templ_7745c5c3_CSSBuilder.String())
-	return templ.ComponentCSSClass{
-		ID:    templ_7745c5c3_CSSID,
-		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
-	}
-}
-
-func DateText() templ.CSSClass {
-	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`font-family:Verdana, sans-serif;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`font-size:4vw;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`DateText`, templ_7745c5c3_CSSBuilder.String())
-	return templ.ComponentCSSClass{
-		ID:    templ_7745c5c3_CSSID,
-		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
-	}
-}
-
 func DateBox(day string, sum int, targetStr string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -87,10 +33,6 @@ func DateBox(day string, sum int, targetStr string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Do not have to handle error since we know it is an int from when we added the context \r\n\t\t\t@MetGoal(ctx.Value(\"sum\").(int), target)\r\n\r\n-->")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
 		target, err := strconv.Atoi(targetStr)
 		if err != nil {
 			panic(err)
@@ -186,13 +128,13 @@ func DateBox(day string, sum int, targetStr string) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(day)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/dateBox.templ`, Line: 65, Col: 31}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/dateBox.templ`, Line: 16, Col: 31}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div><!-- @MetGoal(ctx.Value(\"sum0\").(int), target) -->")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

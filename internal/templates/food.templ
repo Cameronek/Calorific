@@ -1,0 +1,135 @@
+package templates
+
+import (
+	"github.com/cameronek/Calorific/internal/database"
+	"strconv"
+	"fmt"
+)
+
+
+templ AddButton(text string) {	
+	<button class={FoodButton} onclick="openAddFoodForm()">
+		{text}
+	</button>
+
+	<div class={Overlay} id="overlay">
+		<div class={FormContainer}>
+			<div class={FormPopup} id="myAddFood">
+			    <form action="/addFood" method="POST" onsubmit="closeAddFoodForm()">
+				    <h1 class={FormTitle}>Add Food Item</h1>
+				    <div class={FormFields}>
+				    	<label for="food"><b>Food:</b></label>
+				    	<input class={Input} type="text" placeholder="Enter Food" name="food" required>
+
+				    	<label for="kCals"><b>kCals:</b></label>
+				    	<input class={Input} type="text" placeholder="Enter Calories" name="kCals" required>
+				    </div>
+				    <div class={FormBtnContainer}>
+				    	<button class={FormBtn} type="submit">Add</button>
+				    	<button class={FormBtn} type="button" onclick="closeAddFoodForm()">Close</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script>
+			function openAddFoodForm() {
+			    document.getElementById("myAddFood").style.display = "block";
+				document.getElementById("overlay").style.display = "block";
+			}
+
+			function closeAddFoodForm() {
+  			 	document.getElementById("myAddFood").style.display = "none";
+				document.getElementById("overlay").style.display = "none";
+			}
+		</script>
+	</div>
+}
+
+
+templ DelButton(text string, foods []database.Food) {
+	<button class={FoodButton} onclick="openDelForm()">
+		{text}
+	</button>
+
+	<div class={Overlay} id="overlayDel">
+		<div class={FormContainer}>
+			<div class={FormPopup} id="myFoodDisplay">
+				<h1 class={FormTitle}>Delete Food Item</h1>
+			    @FoodDisplay(foods, true, "food"){}
+			    <div class={FormBtnContainer_ReducedMargin}>
+					<button class={FormBtn} type="button" onclick="closeDelForm()">Close</button>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function openDelForm() {
+			    document.getElementById("myFoodDisplay").style.display = "block";
+				document.getElementById("overlayDel").style.display = "block";
+			}
+
+			function closeDelForm() {
+  			 	document.getElementById("myFoodDisplay").style.display = "none";
+				document.getElementById("overlayDel").style.display = "none";
+			}
+		</script>
+	</div>
+}
+
+templ FoodDisplay(foods []database.Food, del bool, itemKind string) {
+    <div>
+        if len(foods) == 0 {
+            <p class={FoodContainer}>Nothing added yet!</p>
+        } else {
+            for _, food := range foods {
+                @FoodItem(food, del, itemKind)
+            }
+        }
+    </div>
+}
+
+templ FoodItem(food database.Food, del bool, itemKind string) {
+    <div class={FoodContainer}>
+        <span class={VerdanaFont}><b>{food.Name}</b>: {strconv.Itoa(food.Calories)} kCal</span>
+        if (del) {
+	        @DeleteFoodItemButton(food, itemKind){}
+        } else {
+        	@AddCalsItemButton(food)
+        }
+    </div>
+}
+
+templ DeleteFoodItemButton(food database.Food, itemKind string) {
+	if itemKind == "food" {
+	    <form 
+        method="POST" 
+        action="/deleteFood" 
+        class="inline" 
+        onsubmit="return confirm('Are you sure you want to delete this food?')">
+        	<input type="hidden" name="foodID" value={fmt.Sprint(food.ID)} />
+        	<button type="submit" class={DeleteBtn}>X</button>
+    	</form>				
+	} else if itemKind == "cal" {
+		<form 
+        method="POST" 
+        action="/deleteCals" 
+        class="inline" 
+        onsubmit="return confirm('Are you sure you want to delete this food?')">
+        	<input type="hidden" name="foodID" value={fmt.Sprint(food.ID)} />
+        	<button type="submit" class={DeleteBtn}>X</button>
+    	</form>		
+	}
+}
+
+templ AddCalsItemButton(food database.Food) {
+	    <form 
+        method="POST" 
+        action="/addCals" 
+        class="inline" 
+        onsubmit="return confirm('Are you sure you add this food to your daily calorie consumption?')">
+    	    <input type="hidden" name="foodName" value={food.Name} />
+    	    <input type="hidden" name="foodCals" value={fmt.Sprint(food.Calories)}>
+        	<button type="submit" class={AddBtn}>&#9989</button>
+	    </form>
+}

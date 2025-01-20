@@ -1,0 +1,353 @@
+package templates
+
+
+// Generic
+css Row() {
+	display: flex;
+	flex-direction: row;
+}
+
+css Col() {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+css Center() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+css VerdanaFont() {
+	font-family: Verdana;
+}
+
+// Target related components
+css TargetFrame() {
+	background-color: #4254f5;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+}
+
+css TargetDateBox() {
+	background-color: #fff;
+	color: #000;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 1px 1px black;
+
+	height: 6vw;
+	width: 6vw;
+
+	margin: 1.5vw;
+
+	font-size: 4vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+css TargetCalorieBox() {
+	background-color: #34a1eb;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 1px 1px black;
+
+	width: 30vw;
+
+	padding-bottom: 1vh;
+	margin: 1.5vw 1.5vw 0vw 0vw;
+
+	font-size: 4vw;
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+css TargetCalorieTitle() {
+	font-size: 5.5vw;
+	font-family: Georgia, sans-serif;
+	font-weight: bold;
+	color: #fff;
+    text-shadow: 2px 2px 2px #000000;   
+    background-color: #34a1eb;
+}
+
+css CaloriesButton() {
+	background-color: #6473ed;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+	padding: 8px;
+	margin: 1vw;
+
+	font-size: 2vw;
+	width: 16vw;
+
+	cursor: pointer;
+}
+
+css TargetButton() {
+	background-color: #6473ed;
+	color: #fff;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+	padding: 4px;
+	margin: 1.5vw;
+
+	font-size: 1.25vw;
+	width: 6vw;
+
+	cursor: pointer;
+}
+
+css FractionLine() {
+    margin: 8px auto;
+    width: 50%;
+	height: 4px;
+	background-color: currentColor;
+	border: none;
+}
+
+// Thumbs up or thumbs down (goal component)
+css Goal() {
+	font-size: 2vw;
+}
+
+// Streak 
+css StreakText() {
+	font-size: 36px;
+	font-family: Verdana;
+}
+
+// Date related components
+css OuterBox() {
+	background-color: #6473ed;
+	color: #FFF;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+
+	padding-top: 0.5vw;
+
+	height: 10vw;
+	width: 9vw;
+
+	display: flex;
+    flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+}
+
+css InnerBox() {
+	background-color: #fff;
+	color: #000;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 1px 1px black;
+
+	height: 6vw;
+	width: 6vw;
+
+	font-size: 4vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+css DateText() {
+	font-family: Verdana, sans-serif;
+	font-size: 4vw;
+	text-align: center;
+}
+
+// Add and Delete Food buttons
+css FoodButton() {
+	background-color: #6473ed;
+	color: #FFF;
+
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 2px black;
+	padding: 16px;
+
+	font-size: 2vw;
+	width: 20vw;
+
+	cursor: pointer;
+}
+
+// Form/popup related components
+
+css FormContainer() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 200px;
+}
+
+css FormPopup() {
+	display: none;
+
+    background-color: #6473ed;
+    border: 3px solid #000;
+    border-radius: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    position: fixed;
+    z-index: 9;
+}
+
+css Hidden() {
+	display: none;
+}
+
+css Overlay() {
+    display: none;
+
+    position: fixed;
+    z-index: 9;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(50px);
+}
+
+css FormBtn() {
+    color: #fff;
+    background-color: #4254f5;
+    cursor: pointer;
+    border: 1px solid black;
+	border-radius: 4px;
+	margin-top: 4px;
+}
+
+css FormBtnContainer() {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+}
+
+css FormBtnContainer_ReducedMargin() {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin:  5px 10px 10px 10px;
+    gap: 10px;
+}
+
+css FoodContainer() {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+}
+
+css DeleteBtn() {
+	color: #fff;
+	background-color: #d81e5b;
+	cursor: pointer;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+css AddBtn() {
+	color: #fff;
+	background-color: #6473ed;
+	cursor: pointer;
+	padding: 0;
+	border: none;
+	background: none;
+}
+
+css FormTitle() {
+	text-shadow: 2px 2px 2px #000000;   
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+css FormFields() {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+css Input() {
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+// Page structuring components
+
+// Body
+css MainBody() {
+    font-family: Georgia, sans-serif;
+    background-color: #34a1eb;
+    margin: 0;
+    padding: 0;
+	color: #FFFFFF;
+}
+
+// App title banner
+css HomeTitle() {
+    color: #FFFFFF;
+    text-shadow: 2px 2px 2px #000000;   
+    background-color: #4254f5;
+
+    border:2px solid black;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    margin: 0 auto;
+
+    text-align: center; 
+
+    vertical-align: text-bottom;
+}
+
+// Container for previous days
+css DateContainer() {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 30px;
+}
+
+// Container for components related to Food and Calories
+css FoodAndCalorieContainer() {
+    display: flex;
+    gap: 60px;
+    margin: 30px;
+    justify-content: center;
+    align-items: center;
+}

@@ -4,56 +4,7 @@ import (
 	"strconv"
 )
 
-css OuterBox() {
-	background-color: #6473ed;
-	color: #FFF;
-
-	border: 2px solid black;
-	border-radius: 8px;
-	box-shadow: 0px 2px 2px black;
-
-	padding-top: 0.5vw;
-
-	height: 10vw;
-	width: 9vw;
-
-	display: flex;
-    flex-direction: row;
-	justify-content: center;
-	align-items: center;
-
-}
-
-css InnerBox() {
-	background-color: #fff;
-	color: #000;
-
-	border: 2px solid black;
-	border-radius: 8px;
-	box-shadow: 0px 1px 1px black;
-
-	height: 6vw;
-	width: 6vw;
-	transform: translateY(-5%);
-
-	font-size: 4vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-css DateText() {
-	font-family: Verdana, sans-serif;
-	font-size: 4vw;
-	text-align: center;
-}
-
 templ DateBox(day string, sum int, targetStr string) {
-	<!-- Do not have to handle error since we know it is an int from when we added the context 
-			@MetGoal(ctx.Value("sum").(int), target)
-
--->
-
 	{{target, err := strconv.Atoi(targetStr)
 	  if err != nil {
 	  	panic(err)
@@ -64,7 +15,6 @@ templ DateBox(day string, sum int, targetStr string) {
 			<div class={InnerBox}>
 				<span class={DateText}>{day}</span>
 			</div>
-			<!-- @MetGoal(ctx.Value("sum0").(int), target) -->
 			@MetGoal(sum, target)
 		</div>
 	</div>

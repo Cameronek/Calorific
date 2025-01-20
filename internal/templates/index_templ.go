@@ -14,54 +14,6 @@ import (
 	"time"
 )
 
-func HomeTitle() templ.CSSClass {
-	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`color:#FFFFFF;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`text-shadow:2px 2px 2px #000000;   
-    background-color: #4254f5;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border:2px solid black;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border-bottom-left-radius:8px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`border-bottom-right-radius:8px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`margin:0 auto;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`text-align:center; 
-
-    vertical-align: text-bottom;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`HomeTitle`, templ_7745c5c3_CSSBuilder.String())
-	return templ.ComponentCSSClass{
-		ID:    templ_7745c5c3_CSSID,
-		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
-	}
-}
-
-func DateContainer() templ.CSSClass {
-	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`flex-direction:row;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`gap:30px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`margin:30px;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`DateContainer`, templ_7745c5c3_CSSBuilder.String())
-	return templ.ComponentCSSClass{
-		ID:    templ_7745c5c3_CSSID,
-		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
-	}
-}
-
-func CalorieContainer() templ.CSSClass {
-	templ_7745c5c3_CSSBuilder := templruntime.GetBuilder()
-	templ_7745c5c3_CSSBuilder.WriteString(`display:flex;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`gap:60px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`margin:30px;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`justify-content:center;`)
-	templ_7745c5c3_CSSBuilder.WriteString(`align-items:center;`)
-	templ_7745c5c3_CSSID := templ.CSSID(`CalorieContainer`, templ_7745c5c3_CSSBuilder.String())
-	return templ.ComponentCSSClass{
-		ID:    templ_7745c5c3_CSSID,
-		Class: templ.SafeCSS(`.` + templ_7745c5c3_CSSID + `{` + templ_7745c5c3_CSSBuilder.String() + `}`),
-	}
-}
-
 func Index() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -139,27 +91,27 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -6).Day()), ctx.Value("sum6").(int), ctx.Value("target6").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -6).Day()), ctx.Value("sum6").(int), ctx.Value("target6").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -5).Day()), ctx.Value("sum5").(int), ctx.Value("target5").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -5).Day()), ctx.Value("sum5").(int), ctx.Value("target5").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -4).Day()), ctx.Value("sum4").(int), ctx.Value("target4").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -4).Day()), ctx.Value("sum4").(int), ctx.Value("target4").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -3).Day()), ctx.Value("sum3").(int), ctx.Value("target3").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -3).Day()), ctx.Value("sum3").(int), ctx.Value("target3").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -2).Day()), ctx.Value("sum2").(int), ctx.Value("target2").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -2).Day()), ctx.Value("sum2").(int), ctx.Value("target2").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().AddDate(0, 0, -1).Day()), ctx.Value("sum1").(int), ctx.Value("target1").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = DateBox(strconv.Itoa(time.Now().UTC().AddDate(0, 0, -1).Day()), ctx.Value("sum1").(int), ctx.Value("target1").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -197,7 +149,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var9 = []any{CalorieContainer}
+			var templ_7745c5c3_Var9 = []any{FoodAndCalorieContainer}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var9...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -219,7 +171,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = Target(strconv.Itoa(time.Now().Day()), strconv.Itoa(ctx.Value("sum0").(int)), ctx.Value("target0").(string)).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = Target(strconv.Itoa(time.Now().UTC().Day()), strconv.Itoa(ctx.Value("sum0").(int)), ctx.Value("target0").(string)).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -227,7 +179,7 @@ func Index() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			var templ_7745c5c3_Var11 = []any{CalorieContainer}
+			var templ_7745c5c3_Var11 = []any{FoodAndCalorieContainer}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var11...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

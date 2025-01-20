@@ -1,19 +1,12 @@
 package templates
 
-css MainBody() {
-    font-family: Georgia, sans-serif;
-    background-color: #34a1eb;
-    margin: 0;
-    padding: 0;
-	color: #FFFFFF;
-}
-
 templ Base(title string) {
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8"/>
 		<title>{title}</title>
+		<link rel="icon" type="image/x-icon" href="/static/images/CalorificFire.png">
 	</head>
 	<body class={MainBody}>
 		{ children...}

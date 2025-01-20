@@ -5,128 +5,6 @@ import (
 	"strconv"
 )
 
-css TargetFrame() {
-	background-color: #4254f5;
-	color: #fff;
-
-	border: 2px solid black;
-	border-radius: 8px;
-	box-shadow: 0px 2px 2px black;
-}
-
-css TargetDateBox() {
-	background-color: #fff;
-	color: #000;
-
-	border: 2px solid black;
-	border-radius: 8px;
-	box-shadow: 0px 1px 1px black;
-
-	height: 6vw;
-	width: 6vw;
-
-	margin: 1.5vw;
-
-	font-size: 4vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-css TargetCalorieBox() {
-	background-color: #34a1eb;
-	color: #fff;
-
-	border: 2px solid black;
-	border-radius: 8px;
-	box-shadow: 0px 1px 1px black;
-
-	width: 30vw;
-
-	padding-bottom: 1vh;
-	margin: 1.5vw 1.5vw 0vw 0vw;
-
-	font-size: 4vw;
-	display: inline-block;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-
-css Row() {
-	display: flex;
-	flex-direction: row;
-}
-
-css Col() {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-css Center() {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-css EditCaloriesButton() {
-	background-color: #6473ed;
-	color: #fff;
-
-	border: 2px solid black;
-	border-radius: 8px;
-	box-shadow: 0px 2px 2px black;
-	padding: 8px;
-	margin: 1vw;
-
-	font-size: 2vw;
-	width: 16vw;
-
-	cursor: pointer;
-}
-
-css TargetButton() {
-	background-color: #6473ed;
-	color: #fff;
-
-	border: 2px solid black;
-	border-radius: 8px;
-	box-shadow: 0px 2px 2px black;
-	padding: 4px;
-	margin: 1.5vw;
-
-	font-size: 1.25vw;
-	width: 6vw;
-
-	cursor: pointer;
-}
-
-css Line() {
-    margin: 8px auto;
-    width: 50%;
-	height: 4px;
-	background-color: currentColor;
-	border: none;
-}
-
-css TargetCalorieTitle() {
-	font-family: Georgia, sans-serif;
-	font-weight: bold;
-	color: #fff;
-    text-shadow: 2px 2px 2px #000000;   
-    background-color: #34a1eb;
-}
-
-css Goal() {
-	font-size: 1.5vw;
-}
-
-css StreakText() {
-	font-size: 36px;
-	font-family: Verdana;
-}
-
 templ Target(day string, cals string, target string) {
 	{{targetInt, err := strconv.Atoi(target)
 	  	if err != nil {
@@ -135,7 +13,6 @@ templ Target(day string, cals string, target string) {
 
 	<div class={TargetFrame}>
 		<div class={Row}>
-			<!-- Add column for check/X -->
 			<div class={Col}>
 				<div class={TargetDateBox}>
 					<span class={DateText}>{day}</span>
@@ -145,7 +22,6 @@ templ Target(day string, cals string, target string) {
 					@EditTargetButton(day){}
 				</div>
 			</div>
-			<!-- Add column for check/X -->
 			@TargetCalories(cals, target){}
 		</div>
 		<div class={Center}>
@@ -162,7 +38,7 @@ templ TargetCalories(cals string, target string) {
         <br/>
         <span class={VerdanaFont}>{cals}</span>
         <br/>
-        <hr class={Line} />
+        <hr class={FractionLine} />
         <span class={VerdanaFont}>{target}</span>
         <br/>
     </div>
@@ -206,7 +82,7 @@ templ EditTargetButton(day string) {
 }
 
 templ AddCalsButton(foods []database.Food) {
-	<button class={EditCaloriesButton} onclick="openAddCalsForm()">
+	<button class={CaloriesButton} onclick="openAddCalsForm()">
 		Add kCals
 	</button>
 
@@ -237,7 +113,7 @@ templ AddCalsButton(foods []database.Food) {
 
 
 templ DelCalsButton(foods []database.Food) {
-	<button class={EditCaloriesButton} onclick="openDelCalsForm()">
+	<button class={CaloriesButton} onclick="openDelCalsForm()">
 		Delete kCals
 	</button>
 
@@ -264,24 +140,4 @@ templ DelCalsButton(foods []database.Food) {
 			}
 		</script>
 	</div>
-}
-
-templ MetGoal(sum int, target int) {
-	if sum >= target {
-		<span class={Goal}>&#128077</span>
-	} else {
-		<span class={Goal}>&#128078</span>
-	}
-}
-
-templ Streak(streak int) {
-	if streak == 0 {
-		<span class={StreakText}>Eat more to reach your goal!</span>
-	} else {
-		<div>
-			<span class={StreakText}>{strconv.Itoa(streak)}</span>
-			<img src="static/images/CalorificFire.png"/>
-			<span class={StreakText}>&nbsp;day streak!</span>
-		</div>
-	}
 }
