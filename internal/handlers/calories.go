@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"github.com/cameronek/Calorific/internal/database"
@@ -88,6 +89,10 @@ func EditTargetHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer db.Close()
+
+	if len(today) == 1 {
+		today = "0" + today
+	}
 
 	_, err = db.Exec("UPDATE dailyGoal SET goalCalories = ? WHERE id = (SELECT id FROM dailyGoal ORDER BY id DESC LIMIT 1) AND strftime('%d', date) = ?", cals, today)
 	if err != nil {
